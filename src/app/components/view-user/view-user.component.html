@@ -1,0 +1,9 @@
+<div class="container">
+	<h1>View User</h1>
+	<div>
+		<strong>User Name: </strong><p>{{userDTO.username}}</p>
+		<strong>Email Address: </strong><p>{{userDTO.emailAddress}}</p>
+		<strong>User Banks: </strong>
+		<app-list-banks [bankDTOs]="userDTO.bankDTOs"></app-list-banks>
+	</div>
+</div>

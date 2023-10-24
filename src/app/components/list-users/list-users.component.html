@@ -1,0 +1,7 @@
+<div class="container">
+	<h1>List Users</h1>
+	<button class="btn btn-secondary" (click)="createUser()">Create User</button>
+	<div *ngFor="let user of userDTOs">
+		<p>{{user.username}} ( {{user.emailAddress}} ) <button (click)="viewUser(user.id)">View User</button></p>
+	</div>
+</div>

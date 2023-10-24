@@ -1,0 +1,38 @@
+<div class="container">
+	<h1>Create new User</h1>
+	<form [formGroup]="userFormGroup" #debugForm="ngForm"> 
+		<span>Form Debug </span>{{debugForm.value | json}} 
+		<br>
+		<span>UserDTO Debug </span>{{userDTO | json}}
+		<hr>
+		<div>
+			<label>Username</label><br>
+			<input [ngClass]="{'is-invalid':userFormGroup.get('username')?.touched && userFormGroup.get('username')?.invalid}" type="text" formControlName = "username"/>
+			<div class="text-danger" *ngIf="userFormGroup.get('username')?.invalid && userFormGroup.get('username')?.touched">
+				<small *ngIf="userFormGroup.get('username')?.errors?.required">Username cannot be empty</small>
+				<small *ngIf="userFormGroup.get('username')?.errors?.forbiddenWords">Username contains forbidden words</small>
+				<small *ngIf="userFormGroup.get('username')?.errors?.minlength">Username should consist of atleast 6 characters</small>
+			</div>
+		</div>
+		<div>
+			<label>EmailAddress</label><br>
+			<input type="email" formControlName="emailAddress"/>
+		</div>
+		<div>
+			<input class="me-1" type="checkbox" formControlName="addBanks">
+			<label>Add banks now?</label>
+		</div>
+		<div class="card mt-3" *ngIf="userFormGroup.get('addBanks')?.value" formGroupName="bankFormGroup">
+			<div class="card-header">
+				<span class="me-1">Add Banks for User</span>
+				<button type="submit" (click)="createUserHasBank()">Create Bank</button>
+			</div>
+			<div class="card-body">
+				<label></label>
+			</div>
+		</div>
+		<br>
+		<hr>
+		<p><i>Caution : Allow Investment addition only after user has been created!</i></p>
+	</form>
+</div>
