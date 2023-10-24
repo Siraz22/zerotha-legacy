@@ -13,7 +13,6 @@ export class CreateUserComponent implements OnInit {
 	constructor(private formBuilder: FormBuilder, private userService: UsersService) { }
 
 	public userFormGroup: FormGroup;
-	public userDTO: UserDTO;
 	public bankList = [];
 
 	private forbiddenWords = ['admin', 'user', 'superuser', 'root'];
@@ -27,12 +26,11 @@ export class CreateUserComponent implements OnInit {
 			username: ['', [Validators.required, Validators.minLength(6), CustomValidators.validateForbiddenWords(this.forbiddenWords)]],
 			emailAddress: ['', Validators.required],
 			addBanks: [false],
-			banks: new FormArray;
 		});
 	}
 
 	public createUser(): void {
-		this.userService.saveUser(this.userDTO).subscribe(
+		this.userService.saveUser(this.compileUserDTO()).subscribe(
 			(result: UserDTO) => {
 				console.log(result);
 			},
@@ -45,5 +43,12 @@ export class CreateUserComponent implements OnInit {
 	public createUserHasBank(): void {
 		const banksFormArray = this.userFormGroup.get('banks') as FormArray;
 		banksFormArray.push(new FormControl);
+	}
+
+	public compileUserDTO(): UserDTO {
+		const userDTO: UserDTO = new UserDTO;
+		userDTO.username = this.userFormGroup.get('username')?.value;
+		userDTO.emailAddress = this.userFormGroup.get('emailAddress')?.value;
+		return userDTO;
 	}
 }

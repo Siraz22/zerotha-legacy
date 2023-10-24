@@ -2,8 +2,6 @@
 	<h1>Create new User</h1>
 	<form [formGroup]="userFormGroup" #debugForm="ngForm"> 
 		<span>Form Debug </span>{{debugForm.value | json}} 
-		<br>
-		<span>UserDTO Debug </span>{{userDTO | json}}
 		<hr>
 		<div>
 			<label>Username</label><br>
@@ -31,6 +29,7 @@
 				<label></label>
 			</div>
 		</div>
+		<button (click)="createUser()">Create User</button>
 		<br>
 		<hr>
 		<p><i>Caution : Allow Investment addition only after user has been created!</i></p>
