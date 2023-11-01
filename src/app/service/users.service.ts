@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDTO } from '../dto/UserDTO';
 import { GlobalConstants } from '../constant/constant';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root'
@@ -10,7 +11,7 @@ import { GlobalConstants } from '../constant/constant';
 export class UsersService {
 
 	constructor(private httpClient: HttpClient) { }
-	private userPath = GlobalConstants.apiPath + '/users'
+	private userPath = environment.apiEndpoint;
 
 	findAllUsers(): Observable<UserDTO[]> {
 		return this.httpClient.get<UserDTO[]>(this.userPath);
