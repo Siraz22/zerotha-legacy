@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class UsersService {
 
 	constructor(private httpClient: HttpClient) { }
-	private userPath = environment.apiEndpoint;
+	private userPath = environment.apiEndpoint+'/users';
 
 	findAllUsers(): Observable<UserDTO[]> {
 		return this.httpClient.get<UserDTO[]>(this.userPath);
